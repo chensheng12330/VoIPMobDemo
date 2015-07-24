@@ -170,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-678" y="-133"/>
+            <point key="canvasLocation" x="-618" y="-318"/>
         </scene>
         <!--视频聊天室-->
         <scene sceneID="wg7-f3-ORb">
@@ -195,7 +195,10 @@
                                 <rect key="frame" x="103" y="29" width="212" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="ogt-8Y-DeJ"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间号:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H04-Kr-R64">
                                 <rect key="frame" x="0.0" y="33" width="95" height="21"/>
@@ -343,18 +346,26 @@
                                     <action selector="openMyVideo:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="oYK-Ww-DMl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="呼出状态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="66m-K1-vm0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="视频聊天室" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="lbCallStatus" destination="66m-K1-vm0" id="Gwo-Ov-278"/>
                         <outlet property="myTableView" destination="JOb-3v-UHQ" id="kSm-BE-YJX"/>
                         <outlet property="tfRoomID" destination="5JY-jQ-GV0" id="GZ9-ja-HCK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-227" y="-287"/>
+            <point key="canvasLocation" x="-248" y="-318"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -373,7 +384,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-920" y="-209"/>
+            <point key="canvasLocation" x="-860" y="-394"/>
         </scene>
     </scenes>
     <resources>

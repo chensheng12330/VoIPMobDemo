@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface SecondViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *tfRoomID;
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UILabel *lbCallStatus;
 
 - (IBAction)createVideoRoom:(id)sender;
 - (IBAction)joinVideoRoom:(id)sender;

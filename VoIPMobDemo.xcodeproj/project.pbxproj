@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		58237AB51B39074E0012CACB /* ISee-linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 58237AB41B39074E0012CACB /* ISee-linphonerc */; };
+		58B70AB61B62397A0073C8B8 /* audio_file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB51B62397A0073C8B8 /* audio_file@2x.png */; };
+		58B70AB81B6239840073C8B8 /* vedio_type@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB71B6239840073C8B8 /* vedio_type@2x.png */; };
 		58C42CC81B4BB2AF00B6DFD5 /* libtmbVoIPMob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C42CBF1B4BA69500B6DFD5 /* libtmbVoIPMob.a */; };
 		58C42CC91B4BB2C000B6DFD5 /* libTMBVoIPMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58C42CC11B4BA69500B6DFD5 /* libTMBVoIPMob.bundle */; };
 		58E042831B2EC09600A53F02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E042821B2EC09600A53F02 /* main.m */; };
@@ -86,6 +88,8 @@
 /* Begin PBXFileReference section */
 		58237AB41B39074E0012CACB /* ISee-linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ISee-linphonerc"; sourceTree = "<group>"; };
 		584DCBBD1B60C47800B7718B /* tmbVoIPMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmbVoIPMob.h; sourceTree = "<group>"; };
+		58B70AB51B62397A0073C8B8 /* audio_file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_file@2x.png"; sourceTree = "<group>"; };
+		58B70AB71B6239840073C8B8 /* vedio_type@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vedio_type@2x.png"; sourceTree = "<group>"; };
 		58C42CB91B4BA69500B6DFD5 /* tmbVoIPMob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tmbVoIPMob.xcodeproj; path = "../../../../go on 11 ITalk/YIDa/ChatDemo-UI2.0/TmbChatMob/tmbChatMob/Utilities/tmbVoIPMob/tmbVoIPMob.xcodeproj"; sourceTree = "<group>"; };
 		58E0427D1B2EC09600A53F02 /* VoIPMobDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoIPMobDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58E042811B2EC09600A53F02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				58F35B441B317314007F442D /* Default-568h@2x.png */,
 				58F35B451B317314007F442D /* Default.png */,
 				58F35B461B317314007F442D /* Default@2x.png */,
+				58B70AB51B62397A0073C8B8 /* audio_file@2x.png */,
+				58B70AB71B6239840073C8B8 /* vedio_type@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -387,7 +393,9 @@
 				58E042941B2EC09600A53F02 /* LaunchScreen.xib in Resources */,
 				58237AB51B39074E0012CACB /* ISee-linphonerc in Resources */,
 				58F35B471B317314007F442D /* Default-568h@2x.png in Resources */,
+				58B70AB61B62397A0073C8B8 /* audio_file@2x.png in Resources */,
 				58F35B491B317314007F442D /* Default@2x.png in Resources */,
+				58B70AB81B6239840073C8B8 /* vedio_type@2x.png in Resources */,
 				58E042911B2EC09600A53F02 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
