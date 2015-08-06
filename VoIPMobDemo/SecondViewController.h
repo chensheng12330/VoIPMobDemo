@@ -15,6 +15,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UILabel *lbCallStatus;
 
+
+@property (nonatomic, strong) UIView *remoteView;
+@property (weak, nonatomic) IBOutlet UIView *locationView;
+
+
 - (IBAction)createVideoRoom:(id)sender;
 - (IBAction)joinVideoRoom:(id)sender;
 - (IBAction)quitVideoRoom:(id)sender;
@@ -32,7 +37,11 @@
 //! 我要发言
 - (IBAction)ISpeak:(id)sender;
 
+//! 开启我的视频
 - (IBAction)openMyVideo:(id)sender;
+
+
+-(void) viewSwitch;
 
 @end
 

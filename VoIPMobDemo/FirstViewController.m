@@ -31,19 +31,23 @@
     return;
 }
 
+-(void) viewSwitch
+{
+    SH_VOIP.delegate = self;
+    [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
+    
+}
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    SH_VOIP.delegate = self;
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    SH_VOIP.delegate = nil;
+    //SH_VOIP.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,9 +58,23 @@
 
 - (IBAction)voipLoginAction:(id)sender {
     
-    [SH_VOIP loginVoIPWithUserName:@"13548583222" password:@"123456"];
+    if (self.tfActPwd.text.length<1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先输入账号@密码,格式以@进行分割." delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    
+        return;
+    }
+    
+    NSArray *ar = [self.tfActPwd.text componentsSeparatedByString:@"@"];
+    
+    if (ar.count<1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先输入账号@密码,格式以@进行分割." delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    [SH_VOIP loginVoIPWithUserName:[ar firstObject] password:[ar lastObject]];
+    return;
 }
-
 
 - (void) tmbVoIPMob:(TMBVoIPMob*)tmbVoIPMob
    loginStateUpdate:(TMBLoginState)  callState
@@ -68,9 +86,7 @@
         case TMBLoginOk:
         {
             message = @"SIP服务器登陆成功.";
-            
             [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
-            
             break;
         }
             
@@ -104,8 +120,12 @@ callOutgoingStateUpdate:(TMBCallState) callState
             info = @"对方收到拨号请求，响铃中,等待对方接听...";
             break;
         case TMBCallConnected:
+        {
+            //
+            
             info = @"通话已连接,可进行音视频通话.";
             break;
+        }
         case TMBCallError:
             info = @"呼叫失败.";
             break;
@@ -149,12 +169,22 @@ callIncomingReceived:(NSString*)callPhoneNum
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.tfActPwd resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)viewClick:(id)sender {
+    [self.tfActPwd resignFirstResponder];
+}
 
 - (IBAction)callAction:(id)sender {
     //SH_VOIP cal
     
     //[SH_VOIP call:@"15074865225" displayName:@"huying"];
     //[SH_VOIP call:@"15074865225" displayName:@"huying" callType:TMBVoIPCallSessionTypeVideo];
+    [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
     
     [SH_VOIP call:@"13548583211" displayName:@"huying" callType:TMBVoIPCallSessionTypeVideo];
     

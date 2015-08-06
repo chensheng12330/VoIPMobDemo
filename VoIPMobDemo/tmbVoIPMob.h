@@ -5,7 +5,7 @@
 //  Created by sherwin on 15-6-12.
 //  Copyright (c) 2015年 sherwin. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 #define SH_VOIP [TMBVoIPMob shareInstance]
@@ -88,10 +88,25 @@ callIncomingReceived:(NSString*)callPhoneNum
 
 + (TMBVoIPMob*)shareInstance;
 
+/*!
+ @method
+ @brief      设置 VoIPMob 是否启用日志调试模式 enable进行开关.
+ @discussion 如果设置为YES,API调用过程中，将会输出日志信息,可跟踪视频通话时相关包的信息.
+ @param      enable 启用开关
+ @result     无返回值
+ */
+- (void)setDebugLog:(BOOL) enable;
+
+/*!
+ @method
+ @brief      视频通话库的初使化,（app启动后，只需调用一次即可）
+ @discussion 对音视频通话环境进行配置,可通过[destroyLibVoIPMob] 进行消毁.
+ @result     无返回值，注意相关资料释放的问题。
+ */
 -(void) startLibVoIPMob;
 -(void) destroyLibVoIPMob;
 
-/*
+/*!
  @method
  @brief      使用用户账号,登陆VoIP服务器.可在 @select(tmbVoIPMob:loginStateUpdate:stateStr:) 代理中收到状态更新消息
  @discussion 登陆成功后，将会保护与服务器的长连接.同时会有状态消息更新。使用该方法前，请先调用 startLibVoIPMob 方法.
@@ -113,7 +128,7 @@ callIncomingReceived:(NSString*)callPhoneNum
 - (void) declineCall:(NSString*) callPhoneNum;
 
 
-/*
+/*!
  @method
  @brief      设置视频通话的视频展示视图
  @discussion 视频通话时的远程和本地视频显示视图,函数采取指针弱引用,注意释放问题.
@@ -124,7 +139,7 @@ callIncomingReceived:(NSString*)callPhoneNum
 - (void) setRemoteVideoView:(UIView*) remoteView loctionVideoView:(UIView*) loctionView;
 
 
-/*
+/*!
  @method
  @brief      判断当前是否有正在运行中的通话
  @discussion 状态可为，接通、等待、呼叫.
@@ -137,7 +152,7 @@ callIncomingReceived:(NSString*)callPhoneNum
 - (void) setVideoEnabled:(BOOL)enable;
 - (void) setMicroEnable:(BOOL)enable;
 
-/*
+/*!
  @method
  @brief      获取当前使用摄像头设备是前置还是后置
  @discussion 前置为 Front, 后置为 Back
@@ -145,7 +160,7 @@ callIncomingReceived:(NSString*)callPhoneNum
  */
 - (BOOL) isVideoCameraBackOrFront;
 
-/*
+/*!
  @method
  @brief      切换当前所使用的摄像头设备.
  @discussion 如需判断当前所使用的摄像头设备，可使用 @select(isVideoCameraBackOrFront) 进行获取
@@ -154,6 +169,53 @@ callIncomingReceived:(NSString*)callPhoneNum
 - (void) switchVideoCamera;
 
 
+////////////////////////////
+#pragma mark - 会议室指令操作
+
+///////////////【1】主持人操作系列
+/*!
+ @discussion  主持人指定视频广播某成员，MemID为被广播成员的ID
+ */
+-(void) broadcastVideoMem:(NSString*)callPhoneNum;
+
+
+/*!
+ @discussion  主持人指定某成员发言
+ */
+-(void) makeMemSpeaker:(NSString*)callPhoneNum;
+
+/*!
+ @discussion  主持人取消某成员发言
+ */
+-(void) cancelMemSpeaker:(NSString*)callPhoneNum;
+
+/*!
+ @discussion  主持人踢出某人
+ */
+-(void) makeMemKickOut:(NSString*)callPhoneNum;
+
+////////////////////////////
+
+
+///////////////【2】成员操作系列
+
+/*!
+ @discussion  会议成员询问被指定为视频广播端，同意广播本地视频。
+ */
+-(void) acceptBroadcastVideo;
+
+/*!
+ @discussion  会议成员询问被指定为视频广播端，拒绝广播本地视频
+ */
+-(void) rejectBroadcastVideo;
+
+
+/*!
+ @discussion  成员申请成为视频广播端
+ */
+-(void) applyMakeMeBroadcast:(NSString*)callPhoneNum;
+
+////////////////////////////
 
 @end
 

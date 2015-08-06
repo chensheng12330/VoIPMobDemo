@@ -21,7 +21,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cc1-5G-XoB">
-                                <rect key="frame" x="0.0" y="15" width="320" height="30"/>
+                                <rect key="frame" x="233" y="15" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="登陆">
@@ -157,8 +157,21 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13548583222@123456" borderStyle="bezel" placeholder="登陆账号@密码" minimumFontSize="17" id="5i0-TF-EuY">
+                                <rect key="frame" x="0.0" y="15" width="232" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="ddt-FP-Bxw"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="2rW-7j-BeV" appends="YES" id="XEL-c3-CVv"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="音视频视频" image="first" id="acW-dT-cKf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -166,11 +179,17 @@
                         <outlet property="lbCallStatus" destination="ejt-L2-VEs" id="577-8p-lmb"/>
                         <outlet property="lbLog" destination="M0w-eu-tca" id="8lU-zR-jwA"/>
                         <outlet property="locationView" destination="B0q-bQ-YDl" id="DXR-eg-t8n"/>
+                        <outlet property="tfActPwd" destination="5i0-TF-EuY" id="Qgl-ko-l5T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="2rW-7j-BeV">
+                    <connections>
+                        <action selector="viewClick:" destination="9pv-A4-QxB" id="lEB-iN-dQf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-618" y="-318"/>
+            <point key="canvasLocation" x="-921" y="-586"/>
         </scene>
         <!--视频聊天室-->
         <scene sceneID="wg7-f3-ORb">
@@ -359,13 +378,14 @@
                     <tabBarItem key="tabBarItem" title="视频聊天室" image="second" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="lbCallStatus" destination="66m-K1-vm0" id="Gwo-Ov-278"/>
+                        <outlet property="locationView" destination="gXF-wP-f5F" id="5xA-gO-MJl"/>
                         <outlet property="myTableView" destination="JOb-3v-UHQ" id="kSm-BE-YJX"/>
                         <outlet property="tfRoomID" destination="5JY-jQ-GV0" id="GZ9-ja-HCK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="-318"/>
+            <point key="canvasLocation" x="-498" y="-109"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -384,7 +404,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-860" y="-394"/>
+            <point key="canvasLocation" x="-1405" y="-366"/>
         </scene>
     </scenes>
     <resources>

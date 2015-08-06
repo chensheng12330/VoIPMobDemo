@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "tmbVoIPMob.h"
+#import "FirstViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,11 +16,22 @@
 
 @implementation AppDelegate
 
+/*
+ UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+ UINavigationController *navigationController = [tabBarController viewControllers][0];
+ PlayersViewController *playersViewController = [navigationController viewControllers][0];
+ playersViewController.players = _players;
+ */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    tabBarController.delegate = self;
+    
+    
     [SH_VOIP startLibVoIPMob];
+    //[SH_VOIP setDebugLog:YES];
     
     return YES;
 }
@@ -46,4 +58,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(FirstViewController *)viewController
+{
+    [viewController viewSwitch];
+}
 @end

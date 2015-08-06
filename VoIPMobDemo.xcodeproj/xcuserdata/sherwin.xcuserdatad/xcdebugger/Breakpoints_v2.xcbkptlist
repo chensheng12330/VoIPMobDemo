@@ -73,45 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../../go on 11 ITalk/YIDa/ChatDemo-UI2.0/TmbChatMob/tmbChatMob/Utilities/tmbVoIPMob/tmbVoIPMob/tmbVoIPMob.m"
-            timestampString = "458016930.928573"
+            filePath = "VoIPMobDemo/SecondViewController.m"
+            timestampString = "460363377.720523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
-            landmarkName = "-callUpdate:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../../go on 11 ITalk/YIDa/ChatDemo-UI2.0/TmbChatMob/tmbChatMob/Utilities/tmbVoIPMob/tmbVoIPMob/tmbVoIPMob.m"
-            timestampString = "458016930.928573"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
-            landmarkName = "-displayIncomingCall:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../../go on 11 ITalk/YIDa/ChatDemo-UI2.0/TmbChatMob/tmbChatMob/Utilities/tmbVoIPMob/tmbVoIPMob/tmbVoIPMob.m"
-            timestampString = "458016930.928573"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
-            landmarkName = "-callUpdate:"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-relayVideoToUser:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

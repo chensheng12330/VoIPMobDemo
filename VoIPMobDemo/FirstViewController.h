@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "tmbVoIPMob.h"
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIView *remoteView;
 @property (weak, nonatomic) IBOutlet UIView *locationView;
 @property (weak, nonatomic) IBOutlet UILabel *lbLog;
 @property (weak, nonatomic) IBOutlet UILabel *lbCallStatus;
+
+@property (weak, nonatomic) IBOutlet UITextField *tfActPwd;
+- (IBAction)viewClick:(id)sender;
 
 
 - (IBAction)callAction:(id)sender;
@@ -35,5 +38,9 @@
 - (IBAction)camSwitch:(id)sender;
 
 - (IBAction)openRoomVideo:(id)sender;
+
+
+-(void) viewSwitch;
+
 @end
 

@@ -10,7 +10,7 @@
 
 @interface SecondViewController ()<TMBVoIPMobDelegate>
 
-@property (nonatomic, strong) UIView *remoteView;
+//@property (nonatomic, strong) UIView *remoteView;
 @end
 
 @implementation SecondViewController
@@ -20,23 +20,29 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     self.remoteView = [[UIView alloc] initWithFrame:self.view.frame];
+    SH_VOIP.delegate = self;
 
     [self.view insertSubview:self.remoteView atIndex:0];
-
 }
+
+-(void) viewSwitch
+{
+    SH_VOIP.delegate = self;
+    [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
+}
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    SH_VOIP.delegate = self;
+    
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    SH_VOIP.delegate = nil;
 }
 
 
@@ -54,8 +60,12 @@ callOutgoingStateUpdate:(TMBCallState) callState
             info = @"对方收到拨号请求，响铃中,等待对方接听...";
             break;
         case TMBCallConnected:
+        {
+            //[SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
+            
             info = @"通话已连接,可进行音视频通话.";
             break;
+        }
         case TMBCallError:
             info = @"呼叫失败.";
             break;
@@ -75,24 +85,54 @@ callOutgoingStateUpdate:(TMBCallState) callState
 
 - (IBAction)createVideoRoom:(id)sender {
     
+    [SH_VOIP call:@"conf666110" displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
+    
+    return;
 }
 
 - (IBAction)joinVideoRoom:(id)sender {
+    
+    [SH_VOIP call:@"conf666110" displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
+    
+    //[SH_VOIP broadcastVideoMem:@"13548583222"];
 }
 
 - (IBAction)quitVideoRoom:(id)sender {
+    [SH_VOIP declineCall:@"conf66600"];
 }
 
 - (IBAction)relayVideoToUser:(id)sender {
+    [SH_VOIP broadcastVideoMem:@"13548583222"];
 }
 - (IBAction)outVideoToUser:(id)sender {
+    
+    [SH_VOIP cancelMemSpeaker:@"13548583222"];
+    
 }
 - (IBAction)kickVideoToUser:(id)sender {
+    
+    [SH_VOIP makeMemKickOut:@"13548583222"];
+    return;
 }
 
 - (IBAction)ISpeak:(id)sender {
+    
 }
 
 - (IBAction)openMyVideo:(id)sender {
+    
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:0 reuseIdentifier:@""];
+    
+    return cell;
+}
+
 @end

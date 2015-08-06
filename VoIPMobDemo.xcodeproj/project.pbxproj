@@ -10,6 +10,7 @@
 		58237AB51B39074E0012CACB /* ISee-linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 58237AB41B39074E0012CACB /* ISee-linphonerc */; };
 		58B70AB61B62397A0073C8B8 /* audio_file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB51B62397A0073C8B8 /* audio_file@2x.png */; };
 		58B70AB81B6239840073C8B8 /* vedio_type@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB71B6239840073C8B8 /* vedio_type@2x.png */; };
+		58C39FEF1B69CAB100DE9FCE /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C39FEE1B69CAB100DE9FCE /* libiconv.dylib */; };
 		58C42CC81B4BB2AF00B6DFD5 /* libtmbVoIPMob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C42CBF1B4BA69500B6DFD5 /* libtmbVoIPMob.a */; };
 		58C42CC91B4BB2C000B6DFD5 /* libTMBVoIPMob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58C42CC11B4BA69500B6DFD5 /* libTMBVoIPMob.bundle */; };
 		58E042831B2EC09600A53F02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E042821B2EC09600A53F02 /* main.m */; };
@@ -90,6 +91,7 @@
 		584DCBBD1B60C47800B7718B /* tmbVoIPMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmbVoIPMob.h; sourceTree = "<group>"; };
 		58B70AB51B62397A0073C8B8 /* audio_file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_file@2x.png"; sourceTree = "<group>"; };
 		58B70AB71B6239840073C8B8 /* vedio_type@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vedio_type@2x.png"; sourceTree = "<group>"; };
+		58C39FEE1B69CAB100DE9FCE /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		58C42CB91B4BA69500B6DFD5 /* tmbVoIPMob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = tmbVoIPMob.xcodeproj; path = "../../../../go on 11 ITalk/YIDa/ChatDemo-UI2.0/TmbChatMob/tmbChatMob/Utilities/tmbVoIPMob/tmbVoIPMob.xcodeproj"; sourceTree = "<group>"; };
 		58E0427D1B2EC09600A53F02 /* VoIPMobDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoIPMobDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58E042811B2EC09600A53F02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58C39FEF1B69CAB100DE9FCE /* libiconv.dylib in Frameworks */,
 				58C42CC81B4BB2AF00B6DFD5 /* libtmbVoIPMob.a in Frameworks */,
 				58E042D51B2EC27600A53F02 /* libz.dylib in Frameworks */,
 				58E042D31B2EC26D00A53F02 /* libc++.1.dylib in Frameworks */,
@@ -255,6 +258,7 @@
 		58E042AB1B2EC18C00A53F02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58C39FEE1B69CAB100DE9FCE /* libiconv.dylib */,
 				58C42CB91B4BA69500B6DFD5 /* tmbVoIPMob.xcodeproj */,
 				58E042D41B2EC27600A53F02 /* libz.dylib */,
 				58E042D21B2EC26C00A53F02 /* libc++.1.dylib */,
@@ -557,6 +561,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -572,6 +577,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
