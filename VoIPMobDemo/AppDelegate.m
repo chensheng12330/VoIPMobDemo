@@ -31,7 +31,7 @@
     
     
     [SH_VOIP startLibVoIPMob];
-    //[SH_VOIP setDebugLog:YES];
+    [SH_VOIP setDebugLog:YES];
     
     return YES;
 }
