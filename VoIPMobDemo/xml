@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<conference-info version="5" state="full" xmlns="urn:ietf:params:xml:ns:conference-info" entity="sip:conf666110@115.28.41.212">
+<conference-description>
+<display-text>FreeSWITCH Conference</display-text>
+<conf-uris>
+<entry>
+<uri>sip:conf666110@115.28.41.212</uri>
+</entry>
+</conf-uris>
+</conference-description>
+<conference-state>
+<user-count>2</user-count>
+<active>true</active>
+</conference-state>
+
+<users>
+<user role="member" state="common" entity="sip:6000@115.28.41.212"></user>
+<user role="chair" state="video_broadcast" entity="sip:13548583222@115.28.41.212"></user>
+</users>
+</conference-info>

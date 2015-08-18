@@ -8,8 +8,9 @@
 
 #import "FirstViewController.h"
 
-@interface FirstViewController ()<TMBVoIPMobDelegate>
+@interface FirstViewController ()<TMBVoIPMobDelegate,NSXMLParserDelegate>
 
+@property (nonatomic, strong) NSMutableArray *userList;
 @end
 
 @implementation FirstViewController
@@ -28,9 +29,62 @@
     //[SH_VOIP setMicroEnable:YES];
     //[SH_VOIP setSpeakerEnabled:YES];
     
+    [self parser];
     return;
 }
 
+-(void)parser
+{
+    
+    NSString *messageBody = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"xml" ofType:@""] encoding:4 error:nil];
+    
+    NSXMLParser *m_parser = [[NSXMLParser alloc] initWithData:[messageBody dataUsingEncoding:NSUTF8StringEncoding]];
+    [m_parser setDelegate:self];
+    [m_parser setShouldProcessNamespaces:NO];
+    [m_parser setShouldReportNamespacePrefixes:NO];
+    [m_parser setShouldResolveExternalEntities:NO];
+    BOOL flag = [m_parser parse]; //开始解析
+}
+
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    self.userList = [NSMutableArray new];
+}
+
+-(void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary*)attributeDict
+{
+    
+    NSLog(@"startName:%@",elementName);//节点的名称
+    
+    NSLog(@"attributeDict:%@",[attributeDict description]);//节点的属性集合，传入属性名便可方便获得属性值了
+    
+    
+    if ([elementName isEqualToString:@"user"]) {
+        [self.userList addObject:attributeDict];
+    }
+    
+    return;
+}
+
+-(void)parser:(NSXMLParser*)parser foundCharacters:(NSString *)string{
+    
+    NSLog(@"Value:%@",string);
+}
+
+-(void)parser:(NSXMLParser*)parser
+didEndElement:(NSString *)elementName
+ namespaceURI:(NSString *)namespaceURI
+qualifiedName:(NSString *)qName
+
+{
+    NSLog(@"endName:%@",elementName);
+}
+
+
+
+
+//////////////////////////////////////
 -(void) viewSwitch
 {
     SH_VOIP.delegate = self;

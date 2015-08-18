@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		58237AB51B39074E0012CACB /* ISee-linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 58237AB41B39074E0012CACB /* ISee-linphonerc */; };
+		5835E34F1B82CE260038188E /* xml in Resources */ = {isa = PBXBuildFile; fileRef = 5835E34E1B82CE260038188E /* xml */; };
+		58A5FBC91B79E55900CEF2DC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58A5FBC81B79E55900CEF2DC /* icon.png */; };
 		58B70AB61B62397A0073C8B8 /* audio_file@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB51B62397A0073C8B8 /* audio_file@2x.png */; };
 		58B70AB81B6239840073C8B8 /* vedio_type@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58B70AB71B6239840073C8B8 /* vedio_type@2x.png */; };
 		58C39FEF1B69CAB100DE9FCE /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C39FEE1B69CAB100DE9FCE /* libiconv.dylib */; };
@@ -88,7 +90,9 @@
 
 /* Begin PBXFileReference section */
 		58237AB41B39074E0012CACB /* ISee-linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ISee-linphonerc"; sourceTree = "<group>"; };
+		5835E34E1B82CE260038188E /* xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xml; sourceTree = "<group>"; };
 		584DCBBD1B60C47800B7718B /* tmbVoIPMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmbVoIPMob.h; sourceTree = "<group>"; };
+		58A5FBC81B79E55900CEF2DC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		58B70AB51B62397A0073C8B8 /* audio_file@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_file@2x.png"; sourceTree = "<group>"; };
 		58B70AB71B6239840073C8B8 /* vedio_type@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vedio_type@2x.png"; sourceTree = "<group>"; };
 		58C39FEE1B69CAB100DE9FCE /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -234,6 +238,8 @@
 				58F35B461B317314007F442D /* Default@2x.png */,
 				58B70AB51B62397A0073C8B8 /* audio_file@2x.png */,
 				58B70AB71B6239840073C8B8 /* vedio_type@2x.png */,
+				58A5FBC81B79E55900CEF2DC /* icon.png */,
+				5835E34E1B82CE260038188E /* xml */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -391,12 +397,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5835E34F1B82CE260038188E /* xml in Resources */,
 				58C42CC91B4BB2C000B6DFD5 /* libTMBVoIPMob.bundle in Resources */,
 				58F35B481B317314007F442D /* Default.png in Resources */,
 				58E0428F1B2EC09600A53F02 /* Main.storyboard in Resources */,
 				58E042941B2EC09600A53F02 /* LaunchScreen.xib in Resources */,
 				58237AB51B39074E0012CACB /* ISee-linphonerc in Resources */,
 				58F35B471B317314007F442D /* Default-568h@2x.png in Resources */,
+				58A5FBC91B79E55900CEF2DC /* icon.png in Resources */,
 				58B70AB61B62397A0073C8B8 /* audio_file@2x.png in Resources */,
 				58F35B491B317314007F442D /* Default@2x.png in Resources */,
 				58B70AB81B6239840073C8B8 /* vedio_type@2x.png in Resources */,

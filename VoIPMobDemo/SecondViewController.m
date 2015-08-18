@@ -135,4 +135,101 @@ callOutgoingStateUpdate:(TMBCallState) callState
     return cell;
 }
 
+
+/*! (主持人)
+ @method
+ @brief      会议主持人收到某音/视频会议里的某成员返回的 指定成为音/视频广播的应答状态码
+ @discussion 某成员以接受，或拒绝，表示是否愿意成为音视频广播端
+ @param      strRoomNum 音视频聊天室房间号.（已做confi过滤处理）
+ @param      bYesNo  YES，表示愿意加入， NO,表示拒绝
+ @param      forMem  某成员的callNum 值(即 MemID值)
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastMediaACK:(BOOL)bYesNo
+           forMem:(NSString*)memPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep
+{
+    NSLog(@"xxxxxxxxxxxxxxxdidReceivedBroadcastMediaACK-----> ");
+}
+
+/*! (会与人员)
+ @method
+ @brief      收到音/视频会议中的主持人指定成员广播本地音/视频的邀请
+ @discussion 询问被指定为音/视频广播端者是否同意广播本地音/视频。某成员可以接受，或拒绝，表示是否愿意成为音/视频广播端
+ @param      strRoomNum 音/视频聊天室房间号.（已做confi过滤处理）
+ @param      bYesNo  YES，表示愿意加入， NO,表示拒绝
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastMediaInvitation:(NSString*)masterPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep
+{
+    
+}
+
+
+/*! (主持人)
+ @method
+ @brief      收到会议里的某成员 音/视频 广播端的申请
+ @discussion 收到申请通知后，可以接受，或拒绝，表示是否愿意让该成员成为音/视频广播端
+ @param      strRoomNum  音视频聊天室房间号.（已做confi过滤处理）
+ @param      memPhoneNum 某成员的memPhoneNum 值(即 MemID值)
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedMemApplyForBroadcastMedia:(NSString*)memPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep
+{
+    
+}
+
+
+/*! (会与人员)
+ @method
+ @brief      收到会议中的主持人对某成员音/视频广播端的申请应答
+ @discussion
+ @param      strRoomNum  音视频聊天室房间号.（已做confi过滤处理）
+ @param     bYesNo  YES，表示接受成员成为视频广播端的请求， NO,表示拒绝
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedMemApplyForBroadcastMediaACK:(BOOL)bYesNo
+    broadcastType:(TMBVoIPBroadcastType )broadTyep
+{
+    
+}
+
+/////////////////会议视频直播地址///////
+/*! (参与人员)
+ @method
+ @brief      收到会议中的直播地址的广播信息
+ @discussion
+ @param      strRoomNum   音/视频聊天室房间号.（已做confi过滤处理）
+ @param      urlStringAr  包含直播地址的数组，url为不同视频解码的链接.可通过判断后缀.m3u8  .mp4 判断.
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastUrlList:(NSArray*) urlStringAr
+{
+    NSLog(@"+++++++++++++++++didReceivedBroadcastUrlList++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,urlStringAr);
+}
+
+/*! (参与人员)
+ @method
+ @brief      获取/收到会议中的人员更新回调
+ @discussion
+ @param      strRoomNum   音/视频聊天室房间号.（已做confi过滤处理）
+ @param      memberList   会议成员列表.
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didRoomMemberUpdate:(NSArray*) memberList
+{
+    NSLog(@"++++++++++++++++didRoomMemberUpdate+++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,memberList);
+}
+
 @end

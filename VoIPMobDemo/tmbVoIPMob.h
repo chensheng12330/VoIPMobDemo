@@ -2,8 +2,8 @@
 //  tmbVoIPMob.h
 //  tmbVoIPMob
 //
-//  Created by sherwin on 15-6-12.
-//  Copyright (c) 2015年 sherwin. All rights reserved.
+//  Created by sherwin.chen on 15-6-12.
+//  Copyright (c) 2015年 Temobi. All rights reserved.
 //
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -36,6 +36,13 @@ typedef NS_ENUM(NSInteger, TMBVoIPCallSessionType){
     TMBVoIPCallSessionTypeContent,
 };
 
+
+typedef NS_ENUM(NSInteger, TMBVoIPBroadcastType){
+    TMBVoIPBroadcastTypeAudio       = 0,  //音频广播
+    TMBVoIPBroadcastTypeVideo,            //视频广播
+    TMBVoIPBroadcastTypeOther             //其它方式
+};
+
 @class TMBVoIPMob;
 
 
@@ -46,6 +53,7 @@ typedef NS_ENUM(NSInteger, TMBVoIPCallSessionType){
  */
 @protocol TMBVoIPMobDelegate <NSObject>
 
+@optional
 /*!
  @method
  @brief      登陆状态更新,包括登陆后，各种状态的回调信息
@@ -73,8 +81,91 @@ callIncomingReceived:(NSString*)callPhoneNum
 //! 视频接通显示
 - (void) didCallForRemoteVideoConnected;
 
+/////////////////////////////////////////////////////////////////////
+///////////【指令交互协议】
+/*! (主持人)
+ @method
+ @brief      会议主持人收到某音/视频会议里的某成员返回的 指定成为音/视频广播的应答状态码
+ @discussion 某成员以接受，或拒绝，表示是否愿意成为音视频广播端
+ @param      strRoomNum 音视频聊天室房间号.（已做confi过滤处理）
+ @param      bYesNo  YES，表示愿意加入， NO,表示拒绝
+ @param      forMem  某成员的callNum 值(即 MemID值)
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastMediaACK:(BOOL)bYesNo
+           forMem:(NSString*)memPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep;
+
+/*! (会与人员)
+ @method
+ @brief      收到音/视频会议中的主持人指定成员广播本地音/视频的邀请
+ @discussion 询问被指定为音/视频广播端者是否同意广播本地音/视频。某成员可以接受，或拒绝，表示是否愿意成为音/视频广播端
+ @param      strRoomNum 音/视频聊天室房间号.（已做confi过滤处理）
+ @param      bYesNo  YES，表示愿意加入， NO,表示拒绝
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastMediaInvitation:(NSString*)masterPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep;
+
+
+/*! (主持人)
+ @method
+ @brief      收到会议里的某成员 音/视频 广播端的申请
+ @discussion 收到申请通知后，可以接受，或拒绝，表示是否愿意让该成员成为音/视频广播端
+ @param      strRoomNum  音视频聊天室房间号.（已做confi过滤处理）
+ @param      memPhoneNum 某成员的memPhoneNum 值(即 MemID值)
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedMemApplyForBroadcastMedia:(NSString*)memPhoneNum
+    broadcastType:(TMBVoIPBroadcastType )broadTyep;
+
+
+/*! (会与人员)
+ @method
+ @brief      收到会议中的主持人对某成员音/视频广播端的申请应答
+ @discussion
+ @param      strRoomNum  音视频聊天室房间号.（已做confi过滤处理）
+ @param     bYesNo  YES，表示接受成员成为视频广播端的请求， NO,表示拒绝
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedMemApplyForBroadcastMediaACK:(BOOL)bYesNo
+    broadcastType:(TMBVoIPBroadcastType )broadTyep;
+
+/////////////////会议视频直播地址///////
+/*! (参与人员)
+ @method
+ @brief      收到会议中的直播地址的广播信息
+ @discussion
+ @param      strRoomNum   音/视频聊天室房间号.（已做confi过滤处理）
+ @param      urlList      包含直播地址的数组，url为不同视频解码的链接.可通过判断后缀.m3u8  .mp4 判断.
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didReceivedBroadcastUrlList:(NSArray*) urlList;
+
+/////////////////会议室人员获取/变动接口
+/*! (参与人员)
+ @method
+ @brief      获取/收到会议中的人员更新回调
+ @discussion
+ @param      strRoomNum   音/视频聊天室房间号.（已做confi过滤处理）
+ @param      memberList   会议成员列表.
+ @param
+ @result     无返回值
+ */
+- (void) callRoom:(NSString*) strRoomNum
+didRoomMemberUpdate:(NSArray*) memberList;
+
 @end
 
+//////////////////////@class(TMBVoIPMob)///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 /*
  @class
  @brief 本类为lib的主接口类声明，功能包括库的管理(启动，消毁，验证)/ 实时通话、音视频通话操作等功能。
@@ -173,6 +264,16 @@ callIncomingReceived:(NSString*)callPhoneNum
 #pragma mark - 会议室指令操作
 
 ///////////////【1】主持人操作系列
+
+/* ------------------群组音视频会议主持人指定视频广播端（视频广播端默认拥有音频发言权）
+ （1）	主持人发起切换视频广播端请求。
+ （2）	服务器鉴权，如指定的成员ID为当前的广播端则直接回复成功给主席端。如不是则向被广播端发起确认请求。
+ （3）	音视频服务器发送广播确认请求给被广播端。
+ （4）	被广播端确认广播本端请求，可回复接受或拒绝。
+ （5）	服务器切换视频广播源为成员1，且给予成员1发言权。
+ （6）	服务器通知视频广播端切换结果（切换成功，对方拒绝，切换成功等）。
+ */
+
 /*!
  @discussion  主持人指定视频广播某成员，MemID为被广播成员的ID
  */
@@ -218,7 +319,3 @@ callIncomingReceived:(NSString*)callPhoneNum
 ////////////////////////////
 
 @end
-
-
-
-
