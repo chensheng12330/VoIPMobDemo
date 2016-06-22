@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UILabel *lbCallStatus;
+@property (weak, nonatomic) IBOutlet UITextView *lblogoView;
 
 
 @property (nonatomic, strong) UIView *remoteView;

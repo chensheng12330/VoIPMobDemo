@@ -40,7 +40,12 @@
 - (IBAction)openRoomVideo:(id)sender;
 
 
+- (IBAction)logout:(id)sender;
+
 -(void) viewSwitch;
+
+- (IBAction)audioCall:(id)sender;
+
 
 @end
 

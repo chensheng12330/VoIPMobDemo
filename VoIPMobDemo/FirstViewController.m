@@ -29,9 +29,31 @@
     //[SH_VOIP setMicroEnable:YES];
     //[SH_VOIP setSpeakerEnabled:YES];
     
-    [self parser];
+    //[self parser];
+    
+    //[self getCallPhoneFormEntityStr:@"sip:6000@115.28.41.212"];
     return;
 }
+
+-(NSString*)getCallPhoneFormEntityStr:(NSString*)entity
+{
+    //"sip:6000@115.28.41.212"
+    
+    NSRange firstRang = [entity rangeOfString:@":"];
+    NSRange endRang   = [entity rangeOfString:@"@" options:NSBackwardsSearch];
+    
+    if (firstRang.location == NSNotFound  || endRang.location == NSNotFound) {
+        return nil;
+    }
+    
+    NSRange subRange = NSUnionRange(firstRang, endRang);
+    subRange.length -= 2;
+    subRange.location++;
+    NSString *result= [entity substringWithRange:subRange];
+    
+    return nil;
+}
+
 
 -(void)parser
 {
@@ -50,6 +72,11 @@
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
     self.userList = [NSMutableArray new];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    
 }
 
 -(void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary*)attributeDict
@@ -91,6 +118,8 @@ qualifiedName:(NSString *)qName
     [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
     
 }
+
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -139,19 +168,19 @@ qualifiedName:(NSString *)qName
     switch (callState) {
         case TMBLoginOk:
         {
-            message = @"SIP服务器登陆成功.";
+            message = @"--->SIP服务器登陆成功.";
             [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
             break;
         }
             
         case TMBLoginNone:
-            message = @"";break;
+            message = @"--->未知状态.";break;
         case TMBLoginCleared:
-            message =  @"与SIP服务器失去连接."; break;
+            message =  @"--->SIP服务器登出成功."; break;
         case TMBLoginFailed:
-            message =  @"SIP服务器登陆失败."; break;
+            message =  @"--->SIP服务器登陆失败."; break;
         case TMBLoginProgress:
-            message =  @"正在登陆中..."; break;
+            message =  @"--->正在登陆中..."; break;
         default: break;
     }
     
@@ -240,24 +269,39 @@ callIncomingReceived:(NSString*)callPhoneNum
     //[SH_VOIP call:@"15074865225" displayName:@"huying" callType:TMBVoIPCallSessionTypeVideo];
     [SH_VOIP setRemoteVideoView:self.remoteView loctionVideoView:self.locationView];
     
-    [SH_VOIP call:@"13548583211" displayName:@"huying" callType:TMBVoIPCallSessionTypeVideo];
+    [SH_VOIP call:@"18767111668" displayName:@"18767111667" callType:TMBVoIPCallSessionTypeVideo];
     
     return;
 }
 
+- (IBAction)audioCall:(id)sender {
+    [SH_VOIP call:@"18767111668" displayName:@"18767111667" callType:TMBVoIPCallSessionTypeAudio];
+}
+
+
 - (IBAction)acceptAction:(id)sender {
-    [SH_VOIP acceptCall:@"15074865225"];
+    [SH_VOIP acceptCall:@"18767111668"];
 }
 
 - (IBAction)rejectAction:(id)sender {
-    [SH_VOIP declineCall:@"15074865225"];
+    [SH_VOIP declineCall:@"18767111668"];
 }
 
-- (IBAction)SpeakerSwitchAction:(id)sender {
-    //SH_VOIP setSpeakerEnabled:<#(BOOL)#>
+- (IBAction)SpeakerSwitchAction:(UIButton*)sender {
+    BOOL isSel = sender.selected;
+    
+    [SH_VOIP setSpeakerEnabled:isSel];
+    
+    sender.selected = !isSel;
 }
 
-- (IBAction)MicSwitchAction:(id)sender {
+- (IBAction)MicSwitchAction:(UIButton*)sender {
+    
+    BOOL isSel = sender.selected;
+    
+    [SH_VOIP setMicroEnable:isSel];
+    
+    sender.selected = !isSel;
 }
 
 bool bV = YES;
@@ -280,5 +324,9 @@ bool bV = YES;
 - (IBAction)openRoomVideo:(id)sender {
     
     [SH_VOIP call:@"6000" displayName:@"huying" callType:TMBVoIPCallSessionTypeVideo];
+}
+
+- (IBAction)logout:(id)sender {
+    [SH_VOIP logoutForVoIP];
 }
 @end

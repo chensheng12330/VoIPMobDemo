@@ -85,14 +85,18 @@ callOutgoingStateUpdate:(TMBCallState) callState
 
 - (IBAction)createVideoRoom:(id)sender {
     
-    [SH_VOIP call:@"conf666110" displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
+    NSString *roomid =@"conf66611110";
+    if (self.tfRoomID.text.length>0) {
+        roomid = self.tfRoomID.text;
+    }
+    [SH_VOIP call:roomid displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
     
     return;
 }
 
 - (IBAction)joinVideoRoom:(id)sender {
     
-    [SH_VOIP call:@"conf666110" displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
+    [SH_VOIP call:@"6000" displayName:@"a" callType:TMBVoIPCallSessionTypeVideoRoom];
     
     //[SH_VOIP broadcastVideoMem:@"13548583222"];
 }
@@ -101,20 +105,63 @@ callOutgoingStateUpdate:(TMBCallState) callState
     [SH_VOIP declineCall:@"conf66600"];
 }
 
+
+//! 转播用户视频
 - (IBAction)relayVideoToUser:(id)sender {
-    [SH_VOIP broadcastVideoMem:@"13548583222"];
+    [SH_VOIP broadcastVideoWithMem:@"13548583222"];
 }
+
+//! 停止视频转播
 - (IBAction)outVideoToUser:(id)sender {
-    
-    [SH_VOIP cancelMemSpeaker:@"13548583222"];
+    [SH_VOIP cancelBroadcastVideoWithMem:@"13548583222"];
+    //[SH_VOIP cancelMemSpeaker:@"13548583222"];
     
 }
+
+//! 主持人踢出某人
 - (IBAction)kickVideoToUser:(id)sender {
     
     [SH_VOIP makeMemKickOut:@"13548583222"];
     return;
 }
 
+// 成员申请成为视频广播端
+- (IBAction)applyMakeMeBroadcast:(id)sender {
+    [SH_VOIP applyMakeMeBroadcast:@"13548583222"];
+}
+
+/////////////////////////////////////
+
+//!  主持人接受某成员申请成为视频广播端
+-(IBAction) acceptMemberForBroadcastVideoApply:(id)sender
+{
+    [SH_VOIP acceptMemberForBroadcastVideoApply:@"13548583222"];
+}
+
+//!  主持人拒绝 某成员申请成为视频广播端
+-(IBAction) rejectMemberForBroadcastVideoApply:(id)sender
+{
+    [SH_VOIP rejectMemberForBroadcastVideoApply:@"13548583222"];
+}
+
+////////////////////
+
+//成员同意广播本地视频
+- (IBAction)acceptBroadcastVideo:(id)sender {
+    [SH_VOIP acceptBroadcastVideo];
+}
+
+
+//成员拒绝广播本地视频
+- (IBAction)rejectBroadcastVideo:(id)sender {
+    [SH_VOIP rejectBroadcastVideo];
+}
+
+
+
+
+
+//
 - (IBAction)ISpeak:(id)sender {
     
 }
@@ -122,7 +169,11 @@ callOutgoingStateUpdate:(TMBCallState) callState
 - (IBAction)openMyVideo:(id)sender {
     
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
@@ -150,7 +201,7 @@ didReceivedBroadcastMediaACK:(BOOL)bYesNo
            forMem:(NSString*)memPhoneNum
     broadcastType:(TMBVoIPBroadcastType )broadTyep
 {
-    NSLog(@"xxxxxxxxxxxxxxxdidReceivedBroadcastMediaACK-----> ");
+    NSLog(@"xxxxxxxxxxxxxxxdidReceivedBroadcastMediaACK-----> %@",bYesNo?@"YES":@"NO");
 }
 
 /*! (会与人员)
@@ -165,7 +216,10 @@ didReceivedBroadcastMediaACK:(BOOL)bYesNo
 didReceivedBroadcastMediaInvitation:(NSString*)masterPhoneNum
     broadcastType:(TMBVoIPBroadcastType )broadTyep
 {
+    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"广播端的申请通知." message:[NSString stringWithFormat:@"是否愿意成为音/视频广播端？ ->主持人[%@]",masterPhoneNum] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    alrt.tag = 1002;
     
+    [alrt show];
 }
 
 
@@ -181,7 +235,10 @@ didReceivedBroadcastMediaInvitation:(NSString*)masterPhoneNum
 didReceivedMemApplyForBroadcastMedia:(NSString*)memPhoneNum
     broadcastType:(TMBVoIPBroadcastType )broadTyep
 {
+    UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"广播端的申请通知." message:[NSString stringWithFormat:@"是否愿意让该成员[%@]成为音/视频广播端。",memPhoneNum] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    alrt.tag = 1001;
     
+    [alrt show];
 }
 
 
@@ -198,7 +255,7 @@ didReceivedMemApplyForBroadcastMedia:(NSString*)memPhoneNum
 didReceivedMemApplyForBroadcastMediaACK:(BOOL)bYesNo
     broadcastType:(TMBVoIPBroadcastType )broadTyep
 {
-    
+    NSLog(@"xxxxxxxxxxxxxxxdidReceivedMemApplyForBroadcastMediaACK-----> %@",bYesNo?@"YES":@"NO");
 }
 
 /////////////////会议视频直播地址///////
@@ -214,7 +271,12 @@ didReceivedMemApplyForBroadcastMediaACK:(BOOL)bYesNo
 - (void) callRoom:(NSString*) strRoomNum
 didReceivedBroadcastUrlList:(NSArray*) urlStringAr
 {
-    NSLog(@"+++++++++++++++++didReceivedBroadcastUrlList++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,urlStringAr);
+    NSString * urllog = [NSString stringWithFormat:@"+++++++++++++++++didReceivedBroadcastUrlList++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,urlStringAr];
+    NSLog(@"%@",urllog);
+    
+    NSString *txt = self.lblogoView.text;
+    
+    [self.lblogoView setText:[NSString stringWithFormat:@"%@%@",txt,urllog]];
 }
 
 /*! (参与人员)
@@ -229,7 +291,35 @@ didReceivedBroadcastUrlList:(NSArray*) urlStringAr
 - (void) callRoom:(NSString*) strRoomNum
 didRoomMemberUpdate:(NSArray*) memberList
 {
-    NSLog(@"++++++++++++++++didRoomMemberUpdate+++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,memberList);
+    NSString * urllog = [NSString stringWithFormat:@"++++++++++++++++didRoomMemberUpdate+++++strRoomNum-> [%@]  urlStringAr->【%@】",strRoomNum,memberList];
+    NSLog(@"%@",urllog);
+    
+    NSString *txt = self.lblogoView.text;
+    
+    [self.lblogoView setText:[NSString stringWithFormat:@"%@%@",txt,urllog]];
 }
 
+
+/////////////////////++++++++++++++++++++++++++++++++++++++++++++++++++
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1001) { //收到会议里的某成员 音/视频 广播端的申请
+        
+        if (buttonIndex==1) {
+            [self acceptMemberForBroadcastVideoApply:nil];
+        }
+        else{
+            [self rejectMemberForBroadcastVideoApply:nil];
+        }
+    }
+    else if(alertView.tag == 1002)
+    {
+        if (buttonIndex==1) {
+            [self acceptBroadcastVideo:self];
+        }
+        else{
+            [self rejectBroadcastVideo:self];
+        }
+    }
+}
 @end
